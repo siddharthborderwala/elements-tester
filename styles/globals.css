@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.leap-ui {
+  --font-family: "Mabry Pro";
+}
