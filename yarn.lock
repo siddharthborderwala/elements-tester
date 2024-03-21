@@ -145,7 +145,7 @@
   dependencies:
     "@babel/runtime" "^7.21.0"
 
-"@chain-registry/utils@^1.15.0", "@chain-registry/utils@^1.19.2", "@chain-registry/utils@^1.19.3":
+"@chain-registry/utils@1.19.2", "@chain-registry/utils@^1.15.0", "@chain-registry/utils@^1.19.2", "@chain-registry/utils@^1.19.3":
   version "1.19.2"
   resolved "https://registry.npmjs.org/@chain-registry/utils/-/utils-1.19.2.tgz#6619ced8415a8df3ee94a880954fd2d79f2506d2"
   integrity sha512-jhCmUqIjQNXV2nT+trav+xp50FgrRVDZbcFlt6bLl7K51LR9LoPjtrJjPWxLNaovDQCeyECMMXfImTN6BG2Pxw==
