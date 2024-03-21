@@ -1,20 +1,17 @@
-import '@leapwallet/elements/styles.css'
-import "../styles/globals.css";
+import "@leapwallet/elements/styles.css";
+import "@leapwallet/react-ui/styles.css";
 import "@interchain-ui/react/styles";
+
+import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
 import { SignerOptions, wallets } from "cosmos-kit";
 import { ChainProvider } from "@cosmos-kit/react";
 import { assets, chains } from "chain-registry";
-import {
-  Box,
-  ThemeProvider,
-  useColorModeValue,
-  useTheme,
-} from "@interchain-ui/react";
+import { Box, ThemeProvider, useTheme } from "@interchain-ui/react";
 import localFont from "next/font/local";
 
-const myFont = localFont({ src: '../assets/fonts/Mabry-Pro.woff2' })
+const myFont = localFont({ src: "../assets/fonts/Mabry-Pro.woff2" });
 
 function CreateCosmosApp({ Component, pageProps }: AppProps) {
   const { themeClass } = useTheme();
@@ -47,9 +44,8 @@ function CreateCosmosApp({ Component, pageProps }: AppProps) {
         signerOptions={signerOptions}
       >
         <Box
-          className={`${themeClass} ${myFont.className}`}
+          className={`${themeClass} ${myFont.className} bg-[#222222]`}
           minHeight="100dvh"
-          backgroundColor={useColorModeValue("$white", "$background")}
         >
           <Component {...pageProps} />
         </Box>

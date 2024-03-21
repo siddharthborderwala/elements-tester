@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Layout, Wallet } from "@/components";
 import { CHAIN_NAME } from "@/config";
+import { Label, Switch } from "@leapwallet/react-ui";
 
 const ElementsSwaps = dynamic(() => import("@/components/swaps"), {
   ssr: false,
@@ -24,16 +25,18 @@ export default function Home() {
     <Layout>
       <Wallet chainName={chainName} onChainChange={onChainChange} />
       <div
-        className={`ml-8 leap-ui w-[26rem] bg-transparent ${
+        className={`ml-8 leap-ui w-[26rem] !bg-transparent ${
           isDarkMode ? "dark" : ""
         }`}
       >
         <div className="flex justify-between mb-4">
-          <p>Dark Mode</p>
-          <input
-            type="checkbox"
+          <Label htmlFor="dark-mode" className="text-white">
+            Dark Mode
+          </Label>
+          <Switch
+            id="dark-mode"
             checked={isDarkMode}
-            onChange={() => setIsDarkMode(!isDarkMode)}
+            onCheckedChange={() => setIsDarkMode(!isDarkMode)}
           />
         </div>
         <ElementsSwaps />

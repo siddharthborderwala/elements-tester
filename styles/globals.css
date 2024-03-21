@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .leap-ui {
-  --font-family: "Mabry Pro";
+  --font-family: "Mabry Pro", sans-serif;
 }
