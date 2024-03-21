@@ -8,6 +8,7 @@ import { chains } from "chain-registry";
 export const useElementsWalletClient = (): WalletClient => {
   const { mainWallet } = useWallet();
 
+  // @ts-ignore
   const walletClient: WalletClient = useMemo(() => {
     if (!mainWallet?.client) {
       return {
@@ -38,6 +39,7 @@ export const useElementsWalletClient = (): WalletClient => {
         }
         return client!.enable!(_chains);
       },
+      // @ts-ignore
       getAccount: async (chainId: string) => {
         if (!("enable" in client)) {
           return;
