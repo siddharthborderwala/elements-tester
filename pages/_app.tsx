@@ -1,17 +1,33 @@
-import "@leapwallet/elements/styles.css";
+"use client";
+
 import "@leapwallet/react-ui/styles.css";
 import "@interchain-ui/react/styles";
 
 import "../styles/globals.css";
+import "@leapwallet/elements/styles.css";
 
 import type { AppProps } from "next/app";
-import { SignerOptions, wallets } from "cosmos-kit";
+import { SignerOptions, WalletModalProps, wallets } from "cosmos-kit";
 import { ChainProvider } from "@cosmos-kit/react";
 import { assets, chains } from "chain-registry";
 import { Box, ThemeProvider, useTheme } from "@interchain-ui/react";
 import localFont from "next/font/local";
+import { Dialog, DialogContent, DialogHeader } from "@leapwallet/react-ui";
 
 const myFont = localFont({ src: "../assets/fonts/Mabry-Pro.woff2" });
+
+const WalletModal = (props: WalletModalProps) => {
+  console.log(props.walletRepo);
+
+  return (
+    <Dialog modal={true} open={props.isOpen} onOpenChange={props.setOpen}>
+      <DialogContent>
+        <DialogHeader>Wallet Modal</DialogHeader>
+        <div>hi</div>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 function CreateCosmosApp({ Component, pageProps }: AppProps) {
   const { themeClass } = useTheme();
@@ -44,7 +60,7 @@ function CreateCosmosApp({ Component, pageProps }: AppProps) {
         signerOptions={signerOptions}
       >
         <Box
-          className={`${themeClass} ${myFont.className} bg-[#222222]`}
+          className={`${themeClass} ${myFont.className} leap-ui bg-[#222222]`}
           minHeight="100dvh"
         >
           <Component {...pageProps} />

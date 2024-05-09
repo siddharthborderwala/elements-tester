@@ -30,24 +30,27 @@ export function ChainSelect({
   const cache = useMemo(
     () =>
       chains.reduce(
-        (cache, chain) => (cache[chain.chain_name] = chain, cache),
-        {} as Record<string, Chains[number]>,
+        (cache, chain) => ((cache[chain.chain_name] = chain), cache),
+        {} as Record<string, Chains[number]>
       ),
-    [chains],
+    [chains]
   );
 
-  const options = useMemo(() =>
-    matchSorter(
-      chains
-        .map((chain) => ({
-          logo: chain.logo_URIs?.png || chain.logo_URIs?.svg || "",
-          value: chain.chain_name,
-          label: chain.pretty_name,
-        }))
-        .filter((chain) => chain.value && chain.label),
-      input,
-      { keys: ["value", "label"] },
-    ), [chains, input]);
+  const options = useMemo(
+    () =>
+      matchSorter(
+        chains
+          .map((chain) => ({
+            logo: chain.logo_URIs?.png || chain.logo_URIs?.svg || "",
+            value: chain.chain_name,
+            label: chain.pretty_name,
+          }))
+          .filter((chain) => chain.value && chain.label),
+        input,
+        { keys: ["value", "label"] }
+      ),
+    [chains, input]
+  );
 
   useEffect(() => {
     if (!chainName) setValue(undefined);
@@ -60,7 +63,7 @@ export function ChainSelect({
         setInput(chain.pretty_name);
       }
     }
-  }, [chains, chainName]);
+  }, [chains, chainName, cache]);
 
   const avatar = cache[value!]?.logo_URIs?.png || cache[value!]?.logo_URIs?.svg;
 
@@ -88,8 +91,8 @@ export function ChainSelect({
               }
             }
           }}
-          inputAddonStart={value && avatar
-            ? (
+          inputAddonStart={
+            value && avatar ? (
               <Avatar
                 name={value as string}
                 getInitials={(name) => name[0]}
@@ -100,8 +103,7 @@ export function ChainSelect({
                   paddingX: "$4",
                 }}
               />
-            )
-            : (
+            ) : (
               <Box
                 display="flex"
                 justifyContent="center"
@@ -110,7 +112,8 @@ export function ChainSelect({
               >
                 <Skeleton width="24px" height="24px" borderRadius="$full" />
               </Box>
-            )}
+            )
+          }
           styleProps={{
             width: {
               mobile: "100%",
@@ -120,10 +123,7 @@ export function ChainSelect({
         >
           {options.map((option) => (
             <Combobox.Item key={option.value} textValue={option.label}>
-              <ChainOption
-                logo={option.logo ?? ""}
-                label={option.label}
-              />
+              <ChainOption logo={option.logo ?? ""} label={option.label} />
             </Combobox.Item>
           ))}
         </Combobox>

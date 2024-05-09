@@ -1,7 +1,13 @@
 "use client";
 
-import { Swaps, WalletClientContextProvider } from "@leapwallet/elements";
+import {
+  RouteSettingsProvider,
+  WalletClientContextProvider,
+  Swaps,
+} from "@leapwallet/elements";
 import { useElementsWalletConfig } from "@/hooks/use-elements-client-config";
+import { useState } from "react";
+import { Button } from "@leapwallet/react-ui";
 
 const logWithLabel = (printable: unknown) => {
   return (...args: unknown[]) => {
@@ -11,25 +17,54 @@ const logWithLabel = (printable: unknown) => {
 
 const ElementsSwaps = () => {
   const value = useElementsWalletConfig();
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <WalletClientContextProvider value={value}>
-      <Swaps
-        title="Testing Elements V2 Beta"
-        txnLifecycleHooks={{
-          onTxnComplete: logWithLabel("🎉 TXN complete"),
-          onTxnSignInit: logWithLabel("🟡 TXN sign init"),
-          onTxnSignApproved: logWithLabel("🟢 TXN sign approved"),
-          onTxnSignFailed: logWithLabel("🔴 TXN sign failed"),
-          onTxnInProgress: (d) => {
-            console.log("⏳ TXN in progress", d);
-            return () => {
-              console.log("⌛ TXN in progress cleanup");
-            };
-          },
+    <div className="w-[30rem] !mt-8">
+      {/* <Button
+        onClick={() => {
+          setIsOpen(true);
         }}
-      />
-    </WalletClientContextProvider>
+      >
+        Open IBC Swaps Modal
+      </Button> */}
+      <RouteSettingsProvider>
+        <WalletClientContextProvider value={value}>
+          <Swaps
+            className="border"
+            defaultValues={{
+              sourceChainId: "pacific-1",
+              sourceAsset:
+                "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+              destinationChainId: "pacific-1",
+              destinationAsset:
+                "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+            }}
+            allowedDestinationChains={[
+              {
+                chainId: "pacific-1",
+                assetDenoms: [
+                  "usei",
+                  "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+                ],
+              },
+            ]}
+            // txnLifecycleHooks={{
+            //   onTxnComplete: logWithLabel("🎉 TXN complete"),
+            //   onTxnSignInit: logWithLabel("🟡 TXN sign init"),
+            //   onTxnSignApproved: logWithLabel("🟢 TXN sign approved"),
+            //   onTxnSignFailed: logWithLabel("🔴 TXN sign failed"),
+            //   onTxnInProgress: (d) => {
+            //     console.log("⏳ TXN in progress", d);
+            //     return () => {
+            //       console.log("⌛ TXN in progress cleanup");
+            //     };
+            //   },
+            // }}
+          />
+        </WalletClientContextProvider>
+      </RouteSettingsProvider>
+    </div>
   );
 };
 

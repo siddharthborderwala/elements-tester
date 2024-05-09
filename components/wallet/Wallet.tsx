@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from "@interchain-ui/react";
 import { WalletStatus } from "@cosmos-kit/core";
-import { useChain } from "@cosmos-kit/react";
+import { useChain } from "@cosmos-kit/react-lite";
 import { chains } from "chain-registry";
 import { User } from "./User";
 import { Warning } from "./Warning";
@@ -86,14 +86,14 @@ export function Wallet({
           backgroundColor: useColorModeValue("$white", "$blackAlpha500"),
           boxShadow: useColorModeValue(
             "0 0 2px #dfdfdf, 0 0 6px -2px #d3d3d3",
-            "0 0 2px #363636, 0 0 8px -2px #4f4f4f",
+            "0 0 2px #363636, 0 0 8px -2px #4f4f4f"
           ),
         }}
       >
         {username ? <User name={username} /> : null}
-        {address
-          ? <ClipboardCopyText text={address} truncate="middle" />
-          : null}
+        {address ? (
+          <ClipboardCopyText text={address} truncate="middle" />
+        ) : null}
         <Box
           my="$8"
           flex="1"
@@ -108,9 +108,9 @@ export function Wallet({
         </Box>
 
         {message &&
-            [WalletStatus.Error, WalletStatus.Rejected].includes(status)
-          ? <Warning text={`${wallet?.prettyName}: ${message}`} />
-          : null}
+        [WalletStatus.Error, WalletStatus.Rejected].includes(status) ? (
+          <Warning text={`${wallet?.prettyName}: ${message}`} />
+        ) : null}
       </Stack>
     </Box>
   );
