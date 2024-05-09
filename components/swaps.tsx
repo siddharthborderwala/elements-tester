@@ -28,42 +28,40 @@ const ElementsSwaps = () => {
       >
         Open IBC Swaps Modal
       </Button> */}
-      <RouteSettingsProvider>
-        <WalletClientContextProvider value={value}>
-          <Swaps
-            className="border"
-            defaultValues={{
-              sourceChainId: "pacific-1",
-              sourceAsset:
+      <WalletClientContextProvider value={value}>
+        <Swaps
+          className="border"
+          defaultValues={{
+            sourceChainId: "pacific-1",
+            sourceAsset:
+              "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+            destinationChainId: "pacific-1",
+            destinationAsset:
+              "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
+          }}
+          allowedDestinationChains={[
+            {
+              chainId: "pacific-1",
+              assetDenoms: [
+                "usei",
                 "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
-              destinationChainId: "pacific-1",
-              destinationAsset:
-                "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
-            }}
-            allowedDestinationChains={[
-              {
-                chainId: "pacific-1",
-                assetDenoms: [
-                  "usei",
-                  "cw20:sei1hrndqntlvtmx2kepr0zsfgr7nzjptcc72cr4ppk4yav58vvy7v3s4er8ed",
-                ],
-              },
-            ]}
-            // txnLifecycleHooks={{
-            //   onTxnComplete: logWithLabel("🎉 TXN complete"),
-            //   onTxnSignInit: logWithLabel("🟡 TXN sign init"),
-            //   onTxnSignApproved: logWithLabel("🟢 TXN sign approved"),
-            //   onTxnSignFailed: logWithLabel("🔴 TXN sign failed"),
-            //   onTxnInProgress: (d) => {
-            //     console.log("⏳ TXN in progress", d);
-            //     return () => {
-            //       console.log("⌛ TXN in progress cleanup");
-            //     };
-            //   },
-            // }}
-          />
-        </WalletClientContextProvider>
-      </RouteSettingsProvider>
+              ],
+            },
+          ]}
+          // txnLifecycleHooks={{
+          //   onTxnComplete: logWithLabel("🎉 TXN complete"),
+          //   onTxnSignInit: logWithLabel("🟡 TXN sign init"),
+          //   onTxnSignApproved: logWithLabel("🟢 TXN sign approved"),
+          //   onTxnSignFailed: logWithLabel("🔴 TXN sign failed"),
+          //   onTxnInProgress: (d) => {
+          //     console.log("⏳ TXN in progress", d);
+          //     return () => {
+          //       console.log("⌛ TXN in progress cleanup");
+          //     };
+          //   },
+          // }}
+        />
+      </WalletClientContextProvider>
     </div>
   );
 };
